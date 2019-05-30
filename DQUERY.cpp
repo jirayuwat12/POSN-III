@@ -12,7 +12,7 @@ int main(){
   cin.tie(NULL);
   int n,temp,start,stop;
   vector<int> vi;
-  set<int> s;
+  unordered_set<int> s;
   cin>>n;
   FOR(i,0,n){
     cin>>temp;

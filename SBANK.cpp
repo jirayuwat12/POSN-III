@@ -11,7 +11,7 @@ int main(){
   // getline (cin >> ws,tmp);
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
-  
+
   int t,i=-1,j,n;
   cin>>t;
   vector<map<string,int>> fre(t);
