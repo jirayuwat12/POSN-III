@@ -38,6 +38,7 @@ int Mst(vector<tuple<int,int,ll> > g,int V,int k){
     int p_v = find (p,v);
     if(p_u != p_v){
       dist.pb(get<2>(i));
+      cout<<get<2>(i)<<'='<<get<0>(i)<<'-'<<get<1>(i)<<endl;
       merg(p,r,p_u,p_v);
     }
   }
