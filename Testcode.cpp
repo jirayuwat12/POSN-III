@@ -8,18 +8,25 @@ typedef long long ll;
 typedef vector<int> vi;
 typedef pair<int,int> pii;
 typedef int64_t it;
+int *db;
+int n,t;
 
-struct pp2{
-    double x, y;
-    bool operator<( const pp2 &k )const{
-        if( y == k.y )return x < k.x;
-        else return y < k.y;
+void print(string s,map<int,bool> used){
+  if(s.size() == t) cout<<s<<endl;
+  else for(int j=0;j<n;j++) {
+    auto found = s.find(to_string(db[j]));
+    if(found == string :: npos) {
+      used[db[j]] = true;
+      print(s+to_string(db[j]),used);
     }
-}po2[100100];
+  }
+}
 
 int main(){
-  po2[0].x = 0;
-  po2[0].y = 1;
-  cout<<po2[0].x;
-
+  cin>>n>>t;
+  db = new int[n];
+  for(int i=0;i<n;i++) cin>>db[i];
+  map<int,bool> m;
+  string s;
+  print(s,m);
 }

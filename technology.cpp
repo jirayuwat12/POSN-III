@@ -1,49 +1,43 @@
-#include <vector>
-#include <unordered_map>
-#include <iostream>
-#define pb push_back
+#include <bits/stdc++.h>
+
 using namespace std;
-
-unordered_map<int,bool> maked;
-unordered_map<int,vector<int> > LV_need;
+#define pb push_back
 unordered_map<int,vector<int> > T_need;
-int i,n,k,t,j,ans;
-int result(unordered_map<int,vector<int> > LV_need,unordered_map<int,bool> maked,int ks){
-  for(int ia=0;ia<ks;ia++){
-    bool ck = false;
-    for(auto jf : LV_need[ia]){
-      if(!maked[jf]) ck = true;
+map<int, vector<int> > LV_need;
+map<int,bool>  maked;
+int t;
+void Make(int k){
+  for(auto i: T_need[k]){
+    if(!maked[i]){
+      Make(i);
     }
-    if(ck) return (ia==0) ? -1:ia;
   }
+  if(t-- >0) maked[k] = true;
 }
-int set_make(int jh){
-  for(auto ij : T_need[jh]){
-    if(!maked[ij]) {
-      set_make(ij);
-    }
-  }maked[jh] = true,t--;
-  if(t==0) {j=k;
-  return 100;}
-}
-int main(){
-  cin>>n>>k>>t;
-  for(i=0;i<n;i++){
-    int lv,run,need;
-    cin>>lv>>run;
-    LV_need[lv].pb(i);
-    for(int j=0;j<run;j++){
-      cin>>need;
-      T_need[i].pb(need);
-    }
-  }
-  j=0;ans=-1;
-  for(i=0;i<k && j!= k;i++){
-    for(auto j : LV_need[i]){
-      if(!maked[j]) n =set_make(j);
-      if(n ==100) break;
-    }ans = i;
-  }
-  cout<<ans;
 
+int main(){
+  freopen("C:\\Users\\Lenovo\\Desktop\\POSN III\\technology.in","r",stdin);
+  int n,k;
+  cin>>n>>k>>t;
+  //input
+  for(int i=0;i<n;i++){
+    int LV,num,temp;
+    cin>>LV>>num;
+    LV_need[LV].pb(i);
+    for(int j=0;j<num;j++){
+      cin>>temp;
+      T_need[i].pb(temp-1);
+    }
+  }
+  //set
+  for(int i=0;i<k;i++){
+    for(auto j : LV_need[i]){
+      if(!maked[j]) Make(j);
+    }
+  }
+  for(int i=0;i<k;i++){
+    for(auto j : LV_need[i]){
+      if(!maked[j]) {cout<<--i;i=k;break;}
+    }
+  }
 }
